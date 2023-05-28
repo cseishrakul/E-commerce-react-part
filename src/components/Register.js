@@ -9,18 +9,36 @@ const Register = () => {
   const navigate = useNavigate();
 
   async function save() {
-    let item = { name, email, mobile, password };
-    // console.warn(item);
-    let result = await fetch("http://127.0.0.1:8000/api/register-user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    });
-    result = await result.json();
-    console.log("result", result);
-    navigate("/thanks");
+    let filter =
+      /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (name == "") {
+      alert("Please Enter Your Name");
+    } else if (email == "") {
+      alert("Please Enter Your Email");
+    } else if (!filter.test(email)) {
+      alert("Please Enter Valid Email");
+    } else if (mobile == "") {
+      alert("Please Enter Your Mobile Number");
+    } else if (password == "") {
+      alert("Please Enter Your Password");
+    } else {
+      let item = { name, email, mobile, password };
+      // console.warn(item);
+      let result = await fetch("http://127.0.0.1:8000/api/register-user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      });
+      result = await result.json();
+      console.log("result", result);
+      if (result["email"] == "Email already exists") {
+        alert(result["email"]);
+      } else {
+        navigate("/thanks");
+      }
+    }
   }
 
   return (

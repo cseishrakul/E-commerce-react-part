@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar";
 import Contact from "./components/Contact";
 import Register from "./components/Register";
 import Thanks from "./components/Thanks";
+import Login from "./components/Login";
+import Account from "./components/Account";
 
 function App(){
     return(
@@ -18,7 +20,11 @@ function App(){
                     <Route exact path="/about" element={ <About /> }></Route>
                     <Route exact path="/contact" element={ <Contact /> }></Route>
                     <Route exact path="/register" element={ <Register /> }></Route>
+                    <Route exact path="/login" element={ <Login /> }></Route>
+
+                    
                     <Route exact path="/thanks" element={ <Thanks /> }></Route>
+                    <Route exact path="/account" element={ <Account /> }></Route>
                 </Routes>
             </Router>
         </div>
